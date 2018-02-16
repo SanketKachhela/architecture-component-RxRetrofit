@@ -12,6 +12,8 @@ import com.sample.architecture.component.R;
 import com.sample.architecture.component.adapter.RepositoryAdapter;
 import com.sample.architecture.component.viewmodel.RepositoryViewModel;
 
+import timber.log.Timber;
+
 /**
  * Created by Sanket Kachhela on 04-07-2017.
  */
@@ -28,8 +30,15 @@ public class MainActivity extends LifecycleActivity {
         recyclerRepositoryList = (RecyclerView) findViewById(R.id.repositoryList);
         recyclerRepositoryList.setLayoutManager(new LinearLayoutManager(this));
 
+        Timber.plant(new Timber.DebugTree());
+
         ViewModelProviders.of(this).get(RepositoryViewModel.class).getUserData().observe(this, repositoryList -> {
-            recyclerRepositoryList.setAdapter(new RepositoryAdapter(repositoryList.getItems()));
+            if(repositoryList.isSuccessful()){
+                recyclerRepositoryList.setAdapter(new RepositoryAdapter(repositoryList.body.getItems()));
+            }else{
+                Timber.e(repositoryList.errorMessage);
+            }
+
         });
 
 

@@ -5,6 +5,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
 
+import com.sample.architecture.component.api.ApiResponse;
 import com.sample.architecture.component.api.FetchServiceBase;
 import com.sample.architecture.component.model.RepositoryList;
 
@@ -19,15 +20,11 @@ import rx.schedulers.Schedulers;
 
 public class RepositoryViewModel extends ViewModel {
 
-    private MutableLiveData<RepositoryList> data;
+    private LiveData<ApiResponse<RepositoryList>> data;
 
-    public LiveData<RepositoryList> getUserData() {
+    public LiveData<ApiResponse<RepositoryList>> getUserData() {
         if (data == null) {
-            data = new MutableLiveData<>();
-            FetchServiceBase.getFetcherService().getRepositoryListbyLanguage()
-                    .subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(userList -> data.setValue(userList), Throwable::printStackTrace);
+            data = FetchServiceBase.getFetcherService().getRepositoryListbyLanguage();
             return data;
         }
         return data;
