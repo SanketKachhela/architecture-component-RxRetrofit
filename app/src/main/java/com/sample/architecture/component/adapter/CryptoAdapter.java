@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.sample.architecture.component.R;
 import com.sample.architecture.component.databinding.RecyclerItemBinding;
-import com.sample.architecture.component.model.Item;
+import com.sample.architecture.component.model.CoinPriceModel;
 
 import java.util.ArrayList;
 
@@ -16,32 +16,32 @@ import java.util.ArrayList;
  * Created by Madhav Gor on 09-07-2017.
  */
 
-public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.RepositoryViewHolder> {
+public class CryptoAdapter extends RecyclerView.Adapter<CryptoAdapter.RepositoryViewHolder> {
 
-    private final ArrayList<Item> repositoryList;
+    private final ArrayList<CoinPriceModel> cryptoPriceList;
 
-    public  RepositoryAdapter(ArrayList<Item> repositoryList){
-        this.repositoryList = repositoryList;
+    public CryptoAdapter(ArrayList<CoinPriceModel> cryptoPriceList){
+        this.cryptoPriceList = cryptoPriceList;
     }
 
     @Override
-    public RepositoryAdapter.RepositoryViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public CryptoAdapter.RepositoryViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         final RecyclerItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(viewGroup.getContext()), R.layout.recycler_item,viewGroup, false);
         return new RepositoryViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(RepositoryAdapter.RepositoryViewHolder repositoryViewHolder, int position) {
+    public void onBindViewHolder(CryptoAdapter.RepositoryViewHolder repositoryViewHolder, int position) {
         repositoryViewHolder.binding.setRepository(getItem(position));
     }
 
-    private Item getItem(int position){
-        return repositoryList.get(position);
+    private CoinPriceModel getItem(int position){
+        return cryptoPriceList.get(position);
     }
 
     @Override
     public int getItemCount() {
-        return repositoryList.size();
+        return cryptoPriceList.size();
     }
 
     public class RepositoryViewHolder extends RecyclerView.ViewHolder {

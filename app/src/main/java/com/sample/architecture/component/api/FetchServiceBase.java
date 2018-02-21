@@ -16,7 +16,7 @@ public class FetchServiceBase {
 
     private static FetchService fetchService;
 
-    private static Retrofit GetRestAdapter() {
+    private static Retrofit GetRestAdapter(boolean isNormalAdapter) {
 
         //setup cache
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
@@ -33,14 +33,14 @@ public class FetchServiceBase {
         return new Retrofit.Builder()
                 .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(new LiveDataCallAdapterFactory())
+                .addCallAdapterFactory(isNormalAdapter?RxJavaCallAdapterFactory.create():new LiveDataCallAdapterFactory())
                 .client(client)
                 .build();
     }
 
-    public static FetchService getFetcherService() {
+    public static FetchService getFetcherService(boolean isNormalAdapter) {
         if(fetchService == null)
-            return GetRestAdapter().create(FetchService.class);
+            return GetRestAdapter(isNormalAdapter).create(FetchService.class);
         else
             return fetchService;
     }
