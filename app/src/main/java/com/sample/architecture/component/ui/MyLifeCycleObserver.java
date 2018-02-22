@@ -22,6 +22,10 @@ public class MyLifeCycleObserver implements LifecycleObserver {
         lifecycle.addObserver(this);
     }
 
+    MyLifeCycleObserver(Context context) {
+        this.context = context;
+    }
+
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     public void onPauseEvent() {
         Toast.makeText(context, "ON_RESUME", Toast.LENGTH_SHORT).show();

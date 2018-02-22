@@ -38,7 +38,8 @@ public class LiveDataActivity extends AppCompatActivity {
         recyclerRepositoryList = findViewById(R.id.cryptoPriceList);
         recyclerRepositoryList.setLayoutManager(new LinearLayoutManager(this));
 
-        LiveData<ApiResponse<ArrayList<CoinPriceModel>>> priceListener = new CryptoUpdateManager(this);
+        LiveData<ApiResponse<ArrayList<CoinPriceModel>>> priceListener =
+                new CryptoUpdateManager(this);
         priceListener.observe(this, coinPriceModels -> {
             setData(coinPriceModels);
         });
