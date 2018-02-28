@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sample.architecture.component.ui.MainActivity">
+    tools:context="com.sample.architecture.component.ui.NormalActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/repositoryList"
+        android:id="@+id/cryptoPriceList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"

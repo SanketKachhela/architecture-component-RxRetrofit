@@ -1,6 +1,10 @@
 package com.sample.architecture.component.api;
 
-import com.sample.architecture.component.model.RepositoryList;
+import android.arch.lifecycle.LiveData;
+import android.databinding.ObservableArrayList;
+
+import com.sample.architecture.component.model.CoinPriceModel;
+import java.util.ArrayList;
 
 import retrofit2.http.GET;
 import rx.Observable;
@@ -11,6 +15,9 @@ import rx.Observable;
 
 public interface FetchService {
 
-    @GET("/search/repositories?q=kotlin:assembly&sort=stars&order=desc")
-    Observable<RepositoryList> getRepositoryListbyLanguage();
+    @GET("ticker/?limit=1000")
+    LiveData<ApiResponse<ArrayList<CoinPriceModel>>> getCoinPrice();
+
+    @GET("ticker/?limit=1000")
+    Observable<ArrayList<CoinPriceModel>> getCoinPriceNormal();
 }
